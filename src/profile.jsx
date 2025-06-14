@@ -1,9 +1,21 @@
-import React from 'react'
+import ProfileEdit from "./profileEdit";
+import { useSelector } from "react-redux";
 
 const Profile = () => {
-  return (
-    <div>Profile</div>
-  )
-}
+  const user = useSelector((store) => store.user);
+  console.log({ user });
 
-export default Profile
+  return (
+    <div>
+      {user && Object.keys(user).length > 0 ? (
+        <ProfileEdit user={user} />
+      ) : (
+        <div className="flex justify-center items-center h-screen">
+          <span className="loading loading-spinner loading-lg"></span>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Profile;
